@@ -1,19 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, MapPin, Mountain, Star, Filter } from 'lucide-react';
+import { Search, Mountain, Star, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { sampleMountains } from '@/data/mountains';
 import { Mountain as MountainType } from '@/types';
+import MountainCard from '@/components/MountainCard';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -62,28 +55,6 @@ export default function Home() {
     return matchesSearch && matchesDifficulty && matchesProvince;
   });
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Beginner':
-        return 'bg-green-100 text-green-800';
-      case 'Intermediate':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'Advanced':
-        return 'bg-orange-100 text-orange-800';
-      case 'Expert':
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
@@ -229,54 +200,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredMountains.map((mountain) => (
-              <Card
-                key={mountain.id}
-                className="overflow-hidden hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="aspect-w-16 aspect-h-9 bg-gradient-to-br from-green-400 to-blue-500 h-48 flex items-center justify-center">
-                  <Mountain className="h-16 w-16 text-white opacity-80" />
-                </div>
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <CardTitle className="text-xl">{mountain.name}</CardTitle>
-                    <Badge className={getDifficultyColor(mountain.difficulty)}>
-                      {mountain.difficulty}
-                    </Badge>
-                  </div>
-                  <CardDescription className="flex items-center text-sm text-gray-600">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    {mountain.location.regency}, {mountain.location.province}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Elevation:</span>
-                      <span className="font-medium">
-                        {mountain.elevation.toLocaleString()} m
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Registration Fee:</span>
-                      <span className="font-medium">
-                        {formatCurrency(mountain.registrationFee.domestic)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Best Season:</span>
-                      <span className="font-medium">
-                        {mountain.bestSeasons.join(', ')}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600 line-clamp-3">
-                      {mountain.description}
-                    </p>
-                    <Button className="w-full mt-4" variant="outline">
-                      View Details
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+              <MountainCard key={mountain.id} mountain={mountain} />
             ))}
           </div>
 
