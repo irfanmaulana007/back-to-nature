@@ -14,27 +14,27 @@
 
 ```typescript
 interface Mountain {
-  id: string
-  name: string
-  elevation: number
+  id: string;
+  name: string;
+  elevation: number;
   location: {
-    province: string
-    regency: string
+    province: string;
+    regency: string;
     coordinates: {
-      latitude: number
-      longitude: number
-    }
-  }
-  description: string
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert'
-  bestSeasons: string[]
+      latitude: number;
+      longitude: number;
+    };
+  };
+  description: string;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  bestSeasons: string[];
   registrationFee: {
-    domestic: number
-    international: number
-    currency: 'IDR'
-  }
-  images: string[]
-  lastUpdated: Date
+    domestic: number;
+    international: number;
+    currency: 'IDR';
+  };
+  images: string[];
+  lastUpdated: Date;
 }
 ```
 
@@ -42,28 +42,28 @@ interface Mountain {
 
 ```typescript
 interface HikingTrack {
-  id: string
-  mountainId: string
-  name: string
-  description: string
-  totalDistance: number // in kilometers
+  id: string;
+  mountainId: string;
+  name: string;
+  description: string;
+  totalDistance: number; // in kilometers
   estimatedDuration: {
-    ascent: number // in hours
-    descent: number // in hours
-  }
-  difficulty: 'Easy' | 'Moderate' | 'Hard' | 'Extreme'
-  positions: Position[]
+    ascent: number; // in hours
+    descent: number; // in hours
+  };
+  difficulty: 'Easy' | 'Moderate' | 'Hard' | 'Extreme';
+  positions: Position[];
 }
 
 interface Position {
-  id: string
-  name: string
-  type: 'Basecamp' | 'Pos' | 'Shelter' | 'Summit' | 'Checkpoint'
-  elevation: number
-  estimatedTimeFromPrevious: number // in minutes
-  facilities: string[]
-  waterAvailability: boolean
-  description: string
+  id: string;
+  name: string;
+  type: 'Basecamp' | 'Pos' | 'Shelter' | 'Summit' | 'Checkpoint';
+  elevation: number;
+  estimatedTimeFromPrevious: number; // in minutes
+  facilities: string[];
+  waterAvailability: boolean;
+  description: string;
 }
 ```
 
@@ -127,32 +127,32 @@ interface Position {
 ```typescript
 const sampleMountains = [
   {
-    name: "Gunung Rinjani",
+    name: 'Gunung Rinjani',
     elevation: 3726,
     location: {
-      province: "Nusa Tenggara Barat",
-      regency: "Lombok Timur"
+      province: 'Nusa Tenggara Barat',
+      regency: 'Lombok Timur',
     },
-    difficulty: "Advanced",
+    difficulty: 'Advanced',
     registrationFee: {
       domestic: 150000,
-      international: 220000
-    }
+      international: 220000,
+    },
   },
   {
-    name: "Gunung Semeru",
+    name: 'Gunung Semeru',
     elevation: 3676,
     location: {
-      province: "Jawa Timur",
-      regency: "Lumajang"
+      province: 'Jawa Timur',
+      regency: 'Lumajang',
     },
-    difficulty: "Expert",
+    difficulty: 'Expert',
     registrationFee: {
       domestic: 32500,
-      international: 32500
-    }
-  }
-]
+      international: 32500,
+    },
+  },
+];
 ```
 
 ## Design Requirements
